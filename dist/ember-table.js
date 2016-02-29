@@ -1,6 +1,6 @@
 /*!
 * ember-table v0.9.2
-* Copyright 2012-2015 Addepar Inc.
+* Copyright 2012-2016 Addepar Inc.
 * See LICENSE.md
 */
 (function(){;
@@ -278,6 +278,13 @@ var define, requireModule, require, requirejs;
       // through ctrl/cmd-click or shift-click).
       selectionMode: 'single',
 
+      /**
+       * A flag to control if the height of the container is used to calculate the
+       * table height.
+       * @type {boolean}
+       */
+      isRestrictedToContainerHeight: true,
+
       // ---------------------------------------------------------------------------
       // API - Outputs
       // ---------------------------------------------------------------------------
@@ -523,7 +530,7 @@ var define, requireModule, require, requirejs;
        * @returns {boolean}
        */
       _resizeColumn: function(column, totalResizableWidth, availableWidth) {
-        var newWidth = Math.round(column.get('width') * (availableWidth / totalResizableWidth));
+        var newWidth = Math.floor(column.get('width') * (availableWidth / totalResizableWidth));
 
         var minWidth = column.get('minWidth');
         var maxWidth = column.get('maxWidth');
@@ -611,9 +618,15 @@ var define, requireModule, require, requirejs;
         var height = this.get('_height');
         var contentHeight = this.get('_tableContentHeight') +
             this.get('_headerHeight') + this.get('_footerHeight');
-        return Math.min(contentHeight, height);
+
+        if (this.get('isRestrictedToContainerHeight')) {
+          return Math.min(contentHeight, height);
+        }
+        else {
+          return contentHeight;
+        }
       }).property('_height', '_tableContentHeight', '_headerHeight',
-          '_footerHeight'),
+          '_footerHeight', 'isRestrictedToContainerHeight'),
 
       // Actual width of the fixed columns
       _fixedColumnsWidth: Ember.computed(function() {
@@ -1272,7 +1285,7 @@ var define, requireModule, require, requirejs;
       var child0 = (function() {
         return {
           isHTMLBars: true,
-          revision: "Ember@1.12.1",
+          revision: "Ember@1.12.2",
           blockParams: 0,
           cachedFragment: null,
           hasRendered: false,
@@ -1314,7 +1327,7 @@ var define, requireModule, require, requirejs;
       }());
       return {
         isHTMLBars: true,
-        revision: "Ember@1.12.1",
+        revision: "Ember@1.12.2",
         blockParams: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -1389,7 +1402,7 @@ var define, requireModule, require, requirejs;
       var child0 = (function() {
         return {
           isHTMLBars: true,
-          revision: "Ember@1.12.1",
+          revision: "Ember@1.12.2",
           blockParams: 0,
           cachedFragment: null,
           hasRendered: false,
@@ -1432,7 +1445,7 @@ var define, requireModule, require, requirejs;
       var child1 = (function() {
         return {
           isHTMLBars: true,
-          revision: "Ember@1.12.1",
+          revision: "Ember@1.12.2",
           blockParams: 0,
           cachedFragment: null,
           hasRendered: false,
@@ -1474,7 +1487,7 @@ var define, requireModule, require, requirejs;
       }());
       return {
         isHTMLBars: true,
-        revision: "Ember@1.12.1",
+        revision: "Ember@1.12.2",
         blockParams: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -1542,7 +1555,7 @@ var define, requireModule, require, requirejs;
       var child0 = (function() {
         return {
           isHTMLBars: true,
-          revision: "Ember@1.12.1",
+          revision: "Ember@1.12.2",
           blockParams: 0,
           cachedFragment: null,
           hasRendered: false,
@@ -1584,7 +1597,7 @@ var define, requireModule, require, requirejs;
       }());
       return {
         isHTMLBars: true,
-        revision: "Ember@1.12.1",
+        revision: "Ember@1.12.2",
         blockParams: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -1644,7 +1657,7 @@ var define, requireModule, require, requirejs;
     __exports__["default"] = Ember.HTMLBars.template((function() {
       return {
         isHTMLBars: true,
-        revision: "Ember@1.12.1",
+        revision: "Ember@1.12.2",
         blockParams: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -1704,7 +1717,7 @@ var define, requireModule, require, requirejs;
     __exports__["default"] = Ember.HTMLBars.template((function() {
       return {
         isHTMLBars: true,
-        revision: "Ember@1.12.1",
+        revision: "Ember@1.12.2",
         blockParams: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -1752,7 +1765,7 @@ var define, requireModule, require, requirejs;
       var child0 = (function() {
         return {
           isHTMLBars: true,
-          revision: "Ember@1.12.1",
+          revision: "Ember@1.12.2",
           blockParams: 0,
           cachedFragment: null,
           hasRendered: false,
@@ -1794,7 +1807,7 @@ var define, requireModule, require, requirejs;
       }());
       return {
         isHTMLBars: true,
-        revision: "Ember@1.12.1",
+        revision: "Ember@1.12.2",
         blockParams: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -1854,7 +1867,7 @@ var define, requireModule, require, requirejs;
     __exports__["default"] = Ember.HTMLBars.template((function() {
       return {
         isHTMLBars: true,
-        revision: "Ember@1.12.1",
+        revision: "Ember@1.12.2",
         blockParams: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -1914,7 +1927,7 @@ var define, requireModule, require, requirejs;
     __exports__["default"] = Ember.HTMLBars.template((function() {
       return {
         isHTMLBars: true,
-        revision: "Ember@1.12.1",
+        revision: "Ember@1.12.2",
         blockParams: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -1965,7 +1978,7 @@ var define, requireModule, require, requirejs;
     __exports__["default"] = Ember.HTMLBars.template((function() {
       return {
         isHTMLBars: true,
-        revision: "Ember@1.12.1",
+        revision: "Ember@1.12.2",
         blockParams: 0,
         cachedFragment: null,
         hasRendered: false,
