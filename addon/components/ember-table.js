@@ -545,6 +545,10 @@ StyleBindingsMixin, ResizeHandlerMixin, {
   actions: {
     addColumn: Ember.K,
 
+    cellFocusOut: function(value) {
+      this.sendAction('cellFocusOut', value);
+    },
+
     sortByColumn: function(column) {
       this.sendAction('sortByColumn', column);
     },

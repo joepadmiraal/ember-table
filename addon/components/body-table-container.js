@@ -38,6 +38,10 @@ ShowHorizontalScrollMixin, {
 
     toggleRowCollapse: function(row) {
       this.sendAction('toggleRowCollapse', row);
+    },
+
+    cellFocusOut: function(value) {
+      this.sendAction('cellFocusOut', value);
     }
   }
 });

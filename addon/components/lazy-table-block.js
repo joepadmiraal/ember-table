@@ -38,6 +38,10 @@ export default Ember.Component.extend( StyleBindingsMixin, {
 
     toggleRowCollapse: function(row) {
       this.sendAction('toggleRowCollapse', row);
+    },
+
+    cellFocusOut: function(value) {
+      this.sendAction('cellFocusOut', value); 
     }
   }
 
